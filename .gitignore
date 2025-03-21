@@ -18,7 +18,7 @@ lerna-debug.log*
 /dist/
 /dist-ssr/
 *.local
-
+/node_modules
 # Environment Files
 .env
 *.env.local

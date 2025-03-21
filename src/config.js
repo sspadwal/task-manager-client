@@ -1,2 +1,2 @@
-// src/config.js
-export const API_BASE_URL = 'https://task-manager-server-1-y50b.onrender.com';
+// config.js
+export const BASE_URL = 'https://task-manager-server-1-zq07.onrender.com';

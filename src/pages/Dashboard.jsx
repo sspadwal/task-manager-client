@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskForm from '../components/TaskForm.jsx';
-import { API_BASE_URL } from '../config.js';
+import { BASE_URL } from '../config'; // Path from src/pages/
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,13 +14,13 @@ const Dashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem('user'));
-      const token = user?.token;
+      const user = JSON.parse(localStorage.getItem('user')); // Get the full user object
+      const token = user?.token; // Extract token from user object
       if (!token) {
         setError('No token found. Please log in.');
         return;
       }
-      const { data } = await axios.get(`${API_BASE_URL}/api/tasks`, {
+      const { data } = await axios.get(`${BASE_URL}/api/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log('Fetched tasks:', data);
@@ -46,7 +46,7 @@ const Dashboard = () => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
       const token = user?.token;
-      await axios.delete(`${API_BASE_URL}/api/tasks/${id}`, {
+      await axios.delete(`${BASE_URL}/api/tasks/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(tasks.filter((task) => task._id !== id));
@@ -55,7 +55,6 @@ const Dashboard = () => {
     }
   };
 
-  // Rest of the code remains unchanged
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>
