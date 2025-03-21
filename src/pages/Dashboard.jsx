@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskForm from '../components/TaskForm.jsx';
-import { API_BASE_URL } from '../config'; // Import the base URL
+import { API_BASE_URL } from '../config.js';
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
