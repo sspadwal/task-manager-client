@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { API_BASE_URL } from '../config'; // Import the base URL
+import { API_BASE_URL } from '../../config';
 
 const TaskForm = ({ task, setTask, onSave }) => {
   const [formData, setFormData] = useState({
