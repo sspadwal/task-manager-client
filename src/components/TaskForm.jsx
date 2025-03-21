@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config'; // Import the base URL
 
 const TaskForm = ({ task, setTask, onSave }) => {
   const [formData, setFormData] = useState({
@@ -28,8 +29,8 @@ const TaskForm = ({ task, setTask, onSave }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = JSON.parse(localStorage.getItem('user')); // Get user object
-      const token = user?.token; // Extract token from user object
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = user?.token;
       if (!token) {
         setMessage('No token found. Please log in.');
         navigate('/login');
@@ -38,12 +39,12 @@ const TaskForm = ({ task, setTask, onSave }) => {
 
       const config = { headers: { Authorization: `Bearer ${token}` } };
       const url = task
-        ? `http://localhost:5000/api/tasks/${task._id}` // Update task
-        : 'http://localhost:5000/api/tasks'; // Create task
+        ? `${API_BASE_URL}/api/tasks/${task._id}` // Update task
+        : `${API_BASE_URL}/api/tasks`; // Create task
       const method = task ? 'put' : 'post';
 
       const { data } = await axios[method](url, formData, config);
-      onSave(data); // Update task list in Dashboard
+      onSave(data);
       setMessage(task ? 'Task updated successfully!' : 'Task created successfully!');
       setFormData({ title: '', description: '', priority: 'low', completed: false });
       setTask(null);
@@ -60,6 +61,7 @@ const TaskForm = ({ task, setTask, onSave }) => {
     }
   };
 
+  // Rest of the code remains unchanged
   return (
     <div className="task-form">
       <h2>{task ? 'Edit Task' : 'Add Task'}</h2>

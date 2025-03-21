@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config'; // Import the base URL
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -11,13 +12,14 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/auth/register', { username, password });
+      await axios.post(`${API_BASE_URL}/api/auth/register`, { username, password });
       navigate('/login');
     } catch (error) {
       setError(error.response?.data?.message || 'Registration failed');
     }
   };
 
+  // Rest of the code remains unchanged
   return (
     <div className="auth-page">
       <h1>Register</h1>
