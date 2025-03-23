@@ -1,7 +1,8 @@
+// src/pages/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskForm from '../components/TaskForm.jsx';
-import { BASE_URL } from '../config'; // Path from src/pages/
+import { BASE_URL } from '../config';
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,8 +15,8 @@ const Dashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem('user')); // Get the full user object
-      const token = user?.token; // Extract token from user object
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = user?.token;
       if (!token) {
         setError('No token found. Please log in.');
         return;
@@ -71,8 +72,10 @@ const Dashboard = () => {
               <p>{task.description || 'No Description'}</p>
               <p>Priority: {task.priority || 'Not Set'}</p>
               <p>Status: {task.completed ? 'Completed' : 'Pending'}</p>
-              <button onClick={() => setSelectedTask(task)}>Edit</button>
-              <button onClick={() => handleDelete(task._id)}>Delete</button>
+              <div className="button-container">
+                <button onClick={() => setSelectedTask(task)}>Edit</button>
+                <button onClick={() => handleDelete(task._id)}>Delete</button>
+              </div>
             </div>
           ))
         )}
